@@ -27,4 +27,8 @@ public class LineController : MonoBehaviour
     {
         streakLine.enabled = false;
     }
+    public void GetPositions(Vector3[] points)
+    {
+        streakLine.GetPositions(points);
+    }
 }
