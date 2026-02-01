@@ -11,7 +11,7 @@ public class DetectionMouse : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) {
             LineController.Instance.ShowLine();
             isAiming = true;
-            Time.timeScale = 0.1f;
+            Time.timeScale = 0.5f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             transform.localScale=new Vector3(1f,0.8f,1f);
         }
