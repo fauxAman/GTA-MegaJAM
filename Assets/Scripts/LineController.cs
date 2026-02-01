@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class LineController : MonoBehaviour
 {
-    [SerializeField]private Camera mainCamera;
+    public static LineController Instance { get; private set; }
+    [SerializeField] private Camera mainCamera;
     private LineRenderer streakLine;
     private void Awake()
     {
+
         streakLine = GetComponent<LineRenderer>();
+        streakLine.enabled = false;
+        Instance = this;
     }
     private void Update()
     {
@@ -15,5 +19,12 @@ public class LineController : MonoBehaviour
         streakLine.SetPosition(0, transform.position);
         streakLine.SetPosition(1, mouseWorldPos);
     }
+    public void ShowLine()
+    {
+        streakLine.enabled = true;
+    }
+    public void HideLine()
+    {
+        streakLine.enabled = false;
+    }
 }
-
