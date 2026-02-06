@@ -5,7 +5,12 @@ public class DetectionMouse : MonoBehaviour
 {
     public event EventHandler OnMouseReleased;
     private bool isAiming = false;
+    private Rigidbody2D rigidBody2D;
 
+    private void Awake()
+    {
+        rigidBody2D = GetComponent<Rigidbody2D>();
+    }
     private void OnMouseDown()
     {
         if (Input.GetMouseButtonDown(0)) {
@@ -13,6 +18,7 @@ public class DetectionMouse : MonoBehaviour
             isAiming = true;
             Time.timeScale = 0.5f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            rigidBody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
             transform.localScale=new Vector3(1f,0.8f,1f);
         }
             
@@ -28,6 +34,7 @@ public class DetectionMouse : MonoBehaviour
             
             Time.timeScale = 1f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            rigidBody2D.constraints = RigidbodyConstraints2D.None;
             transform.localScale = new Vector3(1f, 1f, 1f);
 
         }
