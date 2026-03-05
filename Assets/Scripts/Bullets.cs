@@ -5,12 +5,13 @@ public class Bullets : MonoBehaviour
     [SerializeField] private GameObject bullet;
     private float timeBetweenShots = 0.4f;
     private float bulletSpeed = 50f;
-    private float nextShotTime=0f;
+    private float nextShotTime = 0f;
+    private float hit = 0;
     private void Update()
     {
         if (Time.time > nextShotTime)
         {
-                        Shoot();
+            Shoot();
             nextShotTime = Time.time + timeBetweenShots;
         }
     }
@@ -21,4 +22,5 @@ public class Bullets : MonoBehaviour
         rb.linearVelocity = transform.right * bulletSpeed;
         Destroy(newBullet, 5f);
     }
+   
 }

@@ -4,12 +4,13 @@ using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Movement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private Rigidbody2D rigidBody2D;
     private DetectionMouse detectionMouse;
     public bool push = false;
     private Vector3[] points = new Vector3[2];
+    private float hit = 0;
     private void Awake()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
@@ -44,9 +45,10 @@ public class Movement : MonoBehaviour
             rigidBody2D.AddForce(normalizedForce * multiplier,ForceMode2D.Impulse);
 
         }
-        if(collision2D.TryGetComponent<BulletBody>(out BulletBody bullet))
+        if (collision2D.TryGetComponent<BulletBody>(out BulletBody bullet))
         {
-            Debug.Log("Hit Registered");
+            hit++;
+            Debug.Log("Hit Registered"+hit);
         }
     }
 }
