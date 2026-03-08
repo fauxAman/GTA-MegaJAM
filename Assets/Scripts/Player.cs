@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using CodeMonkey.Utils;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
     public bool push = false;
     private Vector3[] points = new Vector3[2];
     private float hit = 0;
+    private float currentHealth=100;
     private void Awake()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
@@ -47,8 +49,13 @@ public class Player : MonoBehaviour
         }
         if (collision2D.TryGetComponent<BulletBody>(out BulletBody bullet))
         {
-            hit++;
-            Debug.Log("Hit Registered"+hit);
+            currentHealth -= 2;
+            Debug.Log("Current Health: " + currentHealth/100);
+            HealthBar.Instance.SetHealth(currentHealth/100);
+            FunctionPeriodic.Create(() => { if (currentHealth < 30) { 
+                } }) ;
+
+            bullet.Destroy();
         }
     }
 }

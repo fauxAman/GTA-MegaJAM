@@ -1,14 +1,24 @@
+using CodeMonkey.Utils;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    private Slider healthbar;
+    private Transform bar;
     public static HealthBar Instance { get; private set; }
-    private void Awake()
+    private void Start()
     {
-        healthbar = GetComponent<Slider>();
+        bar = transform.Find("Bar");
+        bar.localScale = new Vector3(1f, 1f);
         Instance = this;
+        
+    }
+  
+    public void SetHealth(float sizeNormalized)
+    {
+        bar.localScale = new Vector3(sizeNormalized, 1f);
+    }
+    public void SetColor(Color color)
+    {
+     bar.Find("BarSprite").GetComponent<SpriteRenderer>().color = color;
     }
 }
-
